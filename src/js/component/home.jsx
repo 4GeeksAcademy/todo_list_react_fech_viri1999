@@ -1,25 +1,42 @@
-import React from "react";
+import React, { useState } from "react";
 
 //include images into your bundle
 import rigoImage from "../../img/rigo-baby.jpg";
 
+const initialTask = {
+	label: "",
+	done: false
+
+}
 //create your first component
 const Home = () => {
+	const [task, setTask] = useState(initialTask)
+	const [todos, setTodos] = useState([])
+
+	const handleChange = (event) => {
+		setTask({
+			...task,
+			[event.target.name]: event.target.value
+		})
+	}
 	return (
-		<div className="text-center">
-			<h1 className="text-center mt-5">Hello Rigo!</h1>
-			<p>
-				<img src={rigoImage} />
-			</p>
-			<a href="#" className="btn btn-success">
-				If you see this green button... bootstrap is working...
-			</a>
-			<p>
-				Made by{" "}
-				<a href="http://www.4geeksacademy.com">4Geeks Academy</a>, with
-				love!
-			</p>
-		</div>
+		<div className="container">
+			<div className="row">
+				<div className="col-12 col-md-7">
+					<h1>To-Do List</h1>
+					<form>
+						<input
+							type="text"
+							className="form-control"
+							placeholder="Ingresa tus tareas"
+							name="label"
+							value={task.value}
+							onChange={handleChange}
+						/>
+					</form>
+				</div>
+			</div>
+		</div >
 	);
 };
 
